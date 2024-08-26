@@ -1,8 +1,6 @@
 alias la='ls -a'
 alias start-portainer='docker start portainer'
 alias stop-portainer='docker stop portainer'
-alias vscode=code
-alias code=codium
 alias vim=nvim
 alias t=tmux
 alias tx=tmuxinator
