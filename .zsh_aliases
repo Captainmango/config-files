@@ -10,3 +10,24 @@ function run_portainer () {
 	start-portainer
 	echo "Portainer is running on http://localhost:9000"
 }
+
+connectpod() {
+    if [[ -z $* || $* == *--help* ]] ; then
+        echo "Friendly wrapper for kubectl to access a pod in a given namespace and context"
+        echo "usage: connectpod <pod> [container] [context] [namespace]"
+        echo "  pod - fuzzy match on pod name"
+        echo "  container - exact match on container name (default php)"
+        echo "  context - exact match on kubecontext name (default bombay)"
+        echo "  namespace - exact match on kubenamespace name (default staging)"
+        return 0
+    fi
+
+    local container="${2:-php}"
+    local context="${3:-bombay}"
+    local namespace="${4:-staging}"
+
+    kubectx $(kubectx | grep "^$context$")
+    kubens $(kubens | grep "^$namespace$")
+    kubectl exec -it $(kubectl get pods --no-headers -o custom-columns=":metadata.name" --field-selector=status.phase==Running | grep $1) --container "$container" -- bash
+}
+
