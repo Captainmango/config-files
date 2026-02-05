@@ -39,7 +39,7 @@ connectpod() {
 
     kubectx $(kubectx | grep "^$context$")
     kubens $(kubens | grep "^$namespace$")
-    kubectl exec -it $(kubectl get pods --no-headers -o custom-columns=":metadata.name" --field-selector=status.phase==Running | grep $1) --container "$container" -- cmd
+    kubectl exec -it $(kubectl get pods --no-headers -o custom-columns=":metadata.name" --field-selector=status.phase==Running | grep $1) --container "$container" -- "$cmd"
 }
 
 
