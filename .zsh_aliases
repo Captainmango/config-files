@@ -1,14 +1,43 @@
 alias la='ls -a'
-alias start-portainer='docker start portainer'
-alias stop-portainer='docker stop portainer'
 alias vim=nvim
 alias t=tmux
 alias tx=tmuxinator
 alias gt='git town'
 
-function run_portainer () {
-	start-portainer
-	echo "Portainer is running on http://localhost:9000"
+alias ls="ls --color=auto"
+alias gst="git status"
+alias gc="git commit"
+alias ga="git add"
+alias gd="git diff"
+alias gp="git push"
+alias gt='git town'
+alias fu='git commit -am "fixup! $(git log -1 --pretty=%B)"'
+alias sq='git commit -am "squash! $(git log -1 --pretty=%B)"'
+
+alias k="kubectl"
+alias kgp="kubectl get pods"
+alias kgd="kubectl get deployments"
+alias kgs="kubectl get services"
+alias ktop="kubectl top pods"
+
+connectpod() {
+    if [[ -z $* || $* == *--help* ]] ; then
+        echo "Friendly wrapper for kubectl to access a pod in a given namespace and context"
+        echo "usage: connectpod <pod> [container] [context] [namespace]"
+        echo "  pod - fuzzy match on pod name"
+        echo "  container - exact match on container name (default php)"
+        echo "  context - exact match on kubecontext name (default bombay)"
+        echo "  namespace - exact match on kubenamespace name (default staging)"
+        return 0
+    fi
+
+    local container="${2:-php}"
+    local context="${3:-bombay}"
+    local namespace="${4:-staging}"
+
+    kubectx $(kubectx | grep "^$context$")
+    kubens $(kubens | grep "^$namespace$")
+    kubectl exec -it $(kubectl get pods --no-headers -o custom-columns=":metadata.name" --field-selector=status.phase==Running | grep $1) --container "$container" -- bash
 }
 
 connectpod() {
