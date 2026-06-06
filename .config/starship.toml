@@ -25,7 +25,7 @@ $docker_context\
 $conda\
 [](fg:grey bg:blue)\
 $time\
-[▓▓▒░](fg:blue)\
+[▓▒░](fg:blue)\
 $line_break\
 $character"""
 
@@ -44,7 +44,7 @@ black = "#000000"
 [os]
 disabled = false
 style = "bg:grey fg:white"
-format = "[$symbol ]($style)"
+format = "[ $symbol ]($style)"
 
 [os.symbols]
 Windows = ""
@@ -67,7 +67,7 @@ CentOS = ""
 Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
-Pop = "󰕈"
+Pop = ""
 
 [username]
 show_always = true
