@@ -23,7 +23,6 @@ $haskell\
 $python\
 $docker_context\
 $conda\
-$cmd_duration\
 [](fg:grey bg:blue)\
 $time\
 [▓▓▒░](fg:blue)\
@@ -74,7 +73,7 @@ Pop = "󰕈"
 show_always = true
 style_user = "bg:grey fg:white"
 style_root = "bg:grey fg:white"
-format = "[ $user]($style)"
+format = "[ $user ]($style)"
 
 [directory]
 style = "bg:blue fg:white"
@@ -91,11 +90,20 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-format = "[ $symbol $branch ](fg:#111111 bg:green)"
+format = "[ $symbol $branch ](fg:#2a2a2a bg:green)"
 
 [git_status]
-style = "bg:green fg:black"
-format = "[($all_status$ahead_behind )]($style)"
+format = "[($staged$modified$untracked$renamed$deleted$stashed$ahead_behind )](fg:#2a2a2a bg:green)"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+conflicted = "=${count}"
+stashed = "\\$${count}"
+modified = "~${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+untracked = "?${count}"
 
 [nodejs]
 symbol = ""
@@ -162,15 +170,7 @@ ignore_base = false
 disabled = false
 time_format = "%R"
 style = "bg:blue fg:white"
-format = "[ $time ]($style)"
-
-[cmd_duration]
-show_milliseconds = true
-format = "[ $duration ]($style)"
-style = "bg:grey fg:white"
-disabled = false
-show_notifications = true
-min_time_to_notify = 45000
+format = "[  $time ]($style)"
 
 [line_break]
 disabled = false
