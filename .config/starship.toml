@@ -1,10 +1,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[░▒▓▓](fg:grey)\
+[░▒▓](fg:grey)\
 $os\
-[](bg:grey fg:light_grey)\
-$username\
 [](fg:grey bg:blue)\
 $directory\
 [](fg:blue bg:green)\
@@ -23,9 +21,9 @@ $haskell\
 $python\
 $docker_context\
 $conda\
-[](fg:grey bg:blue)\
-$time\
-[▓▒░](fg:blue)\
+[](fg:grey bg:white)\
+$kubernetes\
+[▓▒░](fg:white)\
 $line_break\
 $character"""
 
@@ -69,24 +67,12 @@ Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 Pop = ""
 
-[username]
-show_always = true
-style_user = "bg:grey fg:white"
-style_root = "bg:grey fg:white"
-format = "[ $user ]($style)"
-
 [directory]
 style = "bg:blue fg:white"
 format = "[ $path ]($style)"
-truncation_length = 3
+truncation_length = 6
 truncation_symbol = "…/"
 
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
 
 [git_branch]
 symbol = ""
@@ -166,11 +152,11 @@ style = "bg:grey fg:white"
 format = "[$symbol$environment ]($style)"
 ignore_base = false
 
-[time]
+[kubernetes]
 disabled = false
-time_format = "%R"
-style = "bg:blue fg:white"
-format = "[  $time ]($style)"
+symbol = "☸"
+style = "bg:white fg:black"
+format = "[ $symbol $context( \\($namespace\\)) ]($style)"
 
 [line_break]
 disabled = false
