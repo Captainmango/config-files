@@ -54,7 +54,6 @@ cursor = "#b1c1b1"
 
 [colors.normal]
 black = "#000000"
-grey = "#444444"
 red = "#d70000"
 green = "#5fd700"
 yellow = "#d7af00"
@@ -65,7 +64,6 @@ white = "#e4e4e4"
 
 [colors.bright]
 black = "#000000"
-grey = "#6c6c6c"
 red = "#d70000"
 green = "#5fd700"
 yellow = "#d7af00"
