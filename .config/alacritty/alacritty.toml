@@ -53,7 +53,7 @@ text = "#002b36"
 cursor = "#b1c1b1"
 
 [colors.normal]
-black = "#000000"
+black = "#444444"
 red = "#d70000"
 green = "#5fd700"
 yellow = "#d7af00"
@@ -63,7 +63,7 @@ cyan = "#2aa198"
 white = "#e4e4e4"
 
 [colors.bright]
-black = "#000000"
+black = "#6c6c6c"
 red = "#d70000"
 green = "#5fd700"
 yellow = "#d7af00"
