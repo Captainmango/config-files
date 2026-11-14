@@ -42,4 +42,21 @@ connectpod() {
     kubectl exec -it $(kubectl get pods --no-headers -o custom-columns=":metadata.name" --field-selector=status.phase==Running | grep $1) --container "$container" -- "$cmd"
 }
 
-
+# Re-title the terminal with the alias-expanded command. Oh My Zsh's
+# termsupport builds the OSC 1 tab title (what WezTerm shows) from the raw
+# typed line ($1), so `t` titles the window "t"; this re-titles from the
+# alias-expanded line ($2) so it shows "tmux". Runs after OMZ's hook.
+autoload -Uz add-zsh-hook
+function _title_alias_expanded_preexec {
+  emulate -L zsh
+  setopt extended_glob
+  [[ "${DISABLE_AUTO_TITLE:-}" != true ]] || return 0
+  (( $+functions[title] )) || return 0
+  local -a cmdargs
+  cmdargs=("${(z)2}")
+  [[ "${cmdargs[1]}" == fg ]] && return 0
+  local CMD="${2[(wr)^(*=*|sudo|ssh|mosh|rake|-*)]:gs/%/%%}"
+  local LINE="${2:gs/%/%%}"
+  title "$CMD" "%100>...>${LINE}%<<"
+}
+add-zsh-hook preexec _title_alias_expanded_preexec
